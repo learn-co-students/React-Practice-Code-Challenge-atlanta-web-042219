@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import SushiContainer from './containers/SushiContainer';
 import Table from './containers/Table';
+import WalletForm from './WalletForm'
 
+const totalSushi = 100
 const pageLimit = 4
-const lastPage = Math.ceil(81/4)
+
+const lastPage = Math.ceil(totalSushi/pageLimit)
 const API = `http://localhost:3000/sushis?_limit=${pageLimit}&_page=`
 
 class App extends Component {
@@ -19,7 +22,7 @@ class App extends Component {
 		fetch(API+this.state.page)
 		.then(resp => resp.json())
 		.then(resp => this.setState({
-			page: this.state.page+1,
+			page: this.state.page+1 > lastPage ? 1 : this.state.page+1,
 			sushis: resp
 		}))
 	}
@@ -38,19 +41,14 @@ class App extends Component {
 			alert("You don't have enough money for that!")
 	}
 
-	moreSushi = (e) => {
-		if(this.state.page-1 < lastPage) {
-			this.fetchSushi()
-		}
-		else
-			alert("We're all out of sushi!")
-	}
+	addFunds = (dosh) => this.setState({ wallet: this.state.wallet + parseInt(dosh, 10) })
 
   render() {
     return (
       <div className="app">
-        <SushiContainer moreSushi={this.moreSushi} eatSushi={this.eatSushi} sushis={this.state.sushis} eaten={this.state.eaten} />
-        <Table wallet={this.state.wallet} eaten={this.state.eaten} />
+        <SushiContainer fetchSushi={this.fetchSushi} eatSushi={this.eatSushi} sushis={this.state.sushis} eaten={this.state.eaten} />
+        <WalletForm wallet={this.state.wallet} addFunds={this.addFunds} />
+        <Table eaten={this.state.eaten} />
       </div>
     );
   }
