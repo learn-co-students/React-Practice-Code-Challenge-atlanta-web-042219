@@ -1,31 +1,35 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+
+const plate = (key, index, xOffset=0) => <div className="empty-plate" key={key} style={{ top: (-10 * index), left: Math.floor(Math.random()*(320-300) + 300) + xOffset }} />
+
+const renderPlates = (num) => {
+  let plates = []
+  let end = num
+
+  if(num > 70) {
+    for(let c = 70; c < num; c++)
+      plates.push(plate(plates.length, c-70, 200))
+
+    end = 70
+  }
+  if(num > 40) {
+    for(let b = 40; b < end; b++)
+      plates.push(plate(plates.length, b-40, -200))
+
+    end = 40
+  }
+  for(let a = 0; a < end; a++)
+    plates.push(plate(plates.length, a, 0))
+
+  return plates
+}
 
 const Table = (props) => {
-
-  const renderPlates = (array) => {
-    return array.map((x, index) => {
-      return <div className="empty-plate" style={{ top: -7 * index }}/>
-    })
-  }
-
   return (
-    <Fragment>
-      <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
-      </h1>
-      <div className="table">
-        <div className="stack">
-          {
-            /* 
-               renderPlates takes an array 
-               and renders an empty plate
-               for every element in the array
-            */
-            renderPlates([])
-          }
-        </div>
-      </div>
-    </Fragment>
+    <div className="table">
+      <h2>{props.eaten.length} sushi eaten</h2>
+      <div className="stack">{renderPlates(props.eaten.length)}</div>
+    </div>
   )
 }
 

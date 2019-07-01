@@ -4,23 +4,26 @@ body {
   font-family: sans-serif;
 }
 
-
-.app {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr, 2fr, 2fr, 2fr, 1fr);
-  grid-auto-rows: minmax(100px, auto);
-  align-items: center;
-  grid-template-areas: 
-      ". . . . ."
-      ". bt bt bt ."
-      ". . rm . ."
-      ". tb tb tb .";
+#WalletForm {
+  margin: 0 0 0 1em;
 }
 
+#more-sushi {
+  float: right;
+  margin-right: 5em;
+  font-size: 1em;
+}
 
-.remaining {
-  grid-area: rm;
+.belt {
+  display: flex;
+  margin: 5em 5em 2em 5em;
+  justify-content: space-evenly;
+
+}
+
+.sushi-details {
   margin: auto;
+  text-align: center;
 }
 
 .plate {
@@ -29,8 +32,13 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   margin: auto;
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
+}
+
+.stack {
+  position: relative;
+  top: 30px;
 }
 
 .empty-plate {
@@ -45,30 +53,7 @@ body {
   left: 300px;
 }
 
-.sushi-details {
-  margin: auto;
-  text-align: center;
-}
-
-.stack {
-  position: relative;
-  top: 30px;
-}
-
-.belt {
-  grid-area: bt;
-  display: flex;
-  justify-content: space-evenly;
-
-}
-
-.sushi {
-  min-width: 150px;
-  margin: auto;
-}
-
 .table {
-  grid-area: tb;
   background-image: url("https://storybookstorage.s3.amazonaws.com/items/images/000/152/688/original/Table.png?1444827374");
   background-size: contain; 
   background-repeat: no-repeat;
@@ -76,4 +61,8 @@ body {
   height: 428px;
   width: 700px;
   margin: auto;
+}
+
+.table h2 {
+  float: right;
 }
