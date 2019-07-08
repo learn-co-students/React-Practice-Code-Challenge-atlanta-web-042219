@@ -1,0 +1,15 @@
+language: node_js
+node_js: 
+  - stable
+
+script: 
+  - npm run build
+
+# deploy:
+#   provider: heroku
+#   app: sushi-saga-app
+#   api_key:
+#     secure: 
+#   on: master
+
+
